@@ -21,14 +21,14 @@ path = r"test.csv"
 info = readCsv(path)
 #打印出来是【【】，【】，【】。。】包含列表的列表
 for rows in info:
+    print(rows)
     headLoginStep1 = {'User-Agent':'qianxian/1.1.0 (iPhone; iOS 13.3.1; Scale/3.00)','Accept-Language':'zh-Hans-CN;q=1','Accept-Encoding':'gzip, deflate','Connection':'keep-alive'}
-    postText = {'id':1175 ,'wechatId': 0 }
+    postText = {'id':1270 ,'wechatId': 0 }
     url = 'https://zhixianghezi-api.zhaopin.com/youzhiqi-api/api/article/articleDetail'
     session = requests.session()
     jsondata = json.dumps(postText)
     print(jsondata)
-    data1 = 'id=1175&wechatId=0'
-    postText1 = {'articleId' : 1175 , 'currentPage':1 , 'pageSize' : 10000}
+    postText1 = {'articleId' : 1270 , 'currentPage':1 , 'pageSize' : 10000}
     url1 = 'https://zhixianghezi-api.zhaopin.com/youzhiqi-api/api/wechat/commentList'
     postText13 = {"courseId":"1175",
                   "wechatId":0,
@@ -40,14 +40,35 @@ for rows in info:
                   "company":rows[0],
                   "title":"","adress":"",
                   "companyAccount":""}
+    laodongfa_dick = {"courseId":"1247",
+                  "wechatId":0,
+                  "courseName":"湖北疫情期间劳动关系政策解读",
+                  "courseCreateTime":1589531080000,
+                  "accountCreateTime":1581596218935,
+                  "phone":rows[1],
+                  "email":"",
+                  "company":rows[0],
+                  "title":"","adress":"",
+                  "companyAccount":""}
+    jiuye_dick = {"courseId":"1270",
+                  "wechatId":0,
+                  "courseName":"湖北疫情期间就业政策解读",
+                  "courseCreateTime":1590546227000,
+                  "accountCreateTime":1581596218935,
+                  "phone":rows[1],
+                  "email":"",
+                  "company":rows[0],
+                  "title":"","adress":"",
+                  "companyAccount":""}
     url3 = 'https://zhixianghezi-api.zhaopin.com/youzhiqi-api/api/add-course-visit-record'
-    for n in range(2):
+    for n in range(5):
         r = session.post(url=url,headers = headLoginStep1,data = postText)
         r1 = session.post(url=url1,headers = headLoginStep1,data = postText1)
-        r2 = session.post(url=url3, headers=headLoginStep1, json =postText13)
+        r2 = session.post(url=url3, headers=headLoginStep1, json =jiuye_dick)
         print(r.text)
         print(r1.text)
         print(r2.text)
-        sleep(0.5)
+        sleep(1)
     sleep(1)
+
 
